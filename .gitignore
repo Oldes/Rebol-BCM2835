@@ -1,0 +1,9 @@
+/*
+!/.gitignore
+!/.github
+!/.editorconfig
+!/rebol
+!/src
+!/test
+!/Rebol-BCM2835.nest
+!/README.md
