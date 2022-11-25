@@ -14,8 +14,8 @@ commands: [
 
 	;-----------------------------------------------------------------------------------------------
 	;- GPIO register access                                                                         
-    ;-   These functions allow you to control the GPIO interface. You can set the                   
-    ;-   function of each GPIO pin, read the input state and set the output                         
+	;-   These functions allow you to control the GPIO interface. You can set the                   
+	;-   function of each GPIO pin, read the input state and set the output                         
 	;-----------------------------------------------------------------------------------------------
 
 	gpio_fsel: [
@@ -160,8 +160,8 @@ commands: [
 
 	;-----------------------------------------------------------------------------------------------
 	;- SPI access                                                                                   
-    ;-   These functions let you use SPI0 (Serial Peripheral Interface) to                          
-    ;-   interface with an external SPI device.                                                     
+	;-   These functions let you use SPI0 (Serial Peripheral Interface) to                          
+	;-   interface with an external SPI device.                                                     
 	;-----------------------------------------------------------------------------------------------
 
 	spi_begin: ["Start SPI operations."]
@@ -218,6 +218,129 @@ commands: [
 	]
 ]
 
+ext-values: {
+;; RPiGPIOPin:
+RPI_GPIO_P1_03:         0  ;; Version 1, Pin P1-03
+RPI_GPIO_P1_05:         1  ;; Version 1, Pin P1-05
+RPI_GPIO_P1_07:         4  ;; Version 1, Pin P1-07
+RPI_GPIO_P1_08:        14  ;; Version 1, Pin P1-08, defaults to alt function 0 UART0_TXD
+RPI_GPIO_P1_10:        15  ;; Version 1, Pin P1-10, defaults to alt function 0 UART0_RXD
+RPI_GPIO_P1_11:        17  ;; Version 1, Pin P1-11
+RPI_GPIO_P1_12:        18  ;; Version 1, Pin P1-12, can be PWM channel 0 in ALT FUN 5
+RPI_GPIO_P1_13:        21  ;; Version 1, Pin P1-13
+RPI_GPIO_P1_15:        22  ;; Version 1, Pin P1-15
+RPI_GPIO_P1_16:        23  ;; Version 1, Pin P1-16
+RPI_GPIO_P1_18:        24  ;; Version 1, Pin P1-18
+RPI_GPIO_P1_19:        10  ;; Version 1, Pin P1-19, MOSI when SPI0 in use
+RPI_GPIO_P1_21:         9  ;; Version 1, Pin P1-21, MISO when SPI0 in use
+RPI_GPIO_P1_22:        25  ;; Version 1, Pin P1-22
+RPI_GPIO_P1_23:        11  ;; Version 1, Pin P1-23, CLK when SPI0 in use
+RPI_GPIO_P1_24:         8  ;; Version 1, Pin P1-24, CE0 when SPI0 in use
+RPI_GPIO_P1_26:         7  ;; Version 1, Pin P1-26, CE1 when SPI0 in use
+
+;; RPi Version 2
+RPI_V2_GPIO_P1_03:      2  ;; Version 2, Pin P1-03
+RPI_V2_GPIO_P1_05:      3  ;; Version 2, Pin P1-05
+RPI_V2_GPIO_P1_07:      4  ;; Version 2, Pin P1-07
+RPI_V2_GPIO_P1_08:     14  ;; Version 2, Pin P1-08, defaults to alt function 0 UART0_TXD
+RPI_V2_GPIO_P1_10:     15  ;; Version 2, Pin P1-10, defaults to alt function 0 UART0_RXD
+RPI_V2_GPIO_P1_11:     17  ;; Version 2, Pin P1-11
+RPI_V2_GPIO_P1_12:     18  ;; Version 2, Pin P1-12, can be PWM channel 0 in ALT FUN 5
+RPI_V2_GPIO_P1_13:     27  ;; Version 2, Pin P1-13
+RPI_V2_GPIO_P1_15:     22  ;; Version 2, Pin P1-15
+RPI_V2_GPIO_P1_16:     23  ;; Version 2, Pin P1-16
+RPI_V2_GPIO_P1_18:     24  ;; Version 2, Pin P1-18
+RPI_V2_GPIO_P1_19:     10  ;; Version 2, Pin P1-19, MOSI when SPI0 in use
+RPI_V2_GPIO_P1_21:      9  ;; Version 2, Pin P1-21, MISO when SPI0 in use
+RPI_V2_GPIO_P1_22:     25  ;; Version 2, Pin P1-22
+RPI_V2_GPIO_P1_23:     11  ;; Version 2, Pin P1-23, CLK when SPI0 in use
+RPI_V2_GPIO_P1_24:      8  ;; Version 2, Pin P1-24, CE0 when SPI0 in use
+RPI_V2_GPIO_P1_26:      7  ;; Version 2, Pin P1-26, CE1 when SPI0 in use
+RPI_V2_GPIO_P1_29:      5  ;; Version 2, Pin P1-29
+RPI_V2_GPIO_P1_31:      6  ;; Version 2, Pin P1-31
+RPI_V2_GPIO_P1_32:     12  ;; Version 2, Pin P1-32
+RPI_V2_GPIO_P1_33:     13  ;; Version 2, Pin P1-33
+RPI_V2_GPIO_P1_35:     19  ;; Version 2, Pin P1-35, can be PWM channel 1 in ALT FUN 5 
+RPI_V2_GPIO_P1_36:     16  ;; Version 2, Pin P1-36
+RPI_V2_GPIO_P1_37:     26  ;; Version 2, Pin P1-37
+RPI_V2_GPIO_P1_38:     20  ;; Version 2, Pin P1-38
+RPI_V2_GPIO_P1_40:     21  ;; Version 2, Pin P1-40
+
+;; RPi Version 2, new plug P5
+RPI_V2_GPIO_P5_03:     28  ;; Version 2, Pin P5-03
+RPI_V2_GPIO_P5_04:     29  ;; Version 2, Pin P5-04
+RPI_V2_GPIO_P5_05:     30  ;; Version 2, Pin P5-05
+RPI_V2_GPIO_P5_06:     31  ;; Version 2, Pin P5-06
+
+;; RPi B+ J8 header, also RPi 2 40 pin GPIO header
+RPI_BPLUS_GPIO_J8_03:   2  ;; B+, Pin J8-03
+RPI_BPLUS_GPIO_J8_05:   3  ;; B+, Pin J8-05
+RPI_BPLUS_GPIO_J8_07:   4  ;; B+, Pin J8-07
+RPI_BPLUS_GPIO_J8_08:  14  ;; B+, Pin J8-08, defaults to alt function 0 UART0_TXD
+RPI_BPLUS_GPIO_J8_10:  15  ;; B+, Pin J8-10, defaults to alt function 0 UART0_RXD
+RPI_BPLUS_GPIO_J8_11:  17  ;; B+, Pin J8-11
+RPI_BPLUS_GPIO_J8_12:  18  ;; B+, Pin J8-12, can be PWM channel 0 in ALT FUN 5
+RPI_BPLUS_GPIO_J8_13:  27  ;; B+, Pin J8-13
+RPI_BPLUS_GPIO_J8_15:  22  ;; B+, Pin J8-15
+RPI_BPLUS_GPIO_J8_16:  23  ;; B+, Pin J8-16
+RPI_BPLUS_GPIO_J8_18:  24  ;; B+, Pin J8-18
+RPI_BPLUS_GPIO_J8_19:  10  ;; B+, Pin J8-19, MOSI when SPI0 in use
+RPI_BPLUS_GPIO_J8_21:   9  ;; B+, Pin J8-21, MISO when SPI0 in use
+RPI_BPLUS_GPIO_J8_22:  25  ;; B+, Pin J8-22
+RPI_BPLUS_GPIO_J8_23:  11  ;; B+, Pin J8-23, CLK when SPI0 in use
+RPI_BPLUS_GPIO_J8_24:   8  ;; B+, Pin J8-24, CE0 when SPI0 in use
+RPI_BPLUS_GPIO_J8_26:   7  ;; B+, Pin J8-26, CE1 when SPI0 in use
+RPI_BPLUS_GPIO_J8_29:   5  ;; B+, Pin J8-29
+RPI_BPLUS_GPIO_J8_31:   6  ;; B+, Pin J8-31
+RPI_BPLUS_GPIO_J8_32:  12  ;; B+, Pin J8-32
+RPI_BPLUS_GPIO_J8_33:  13  ;; B+, Pin J8-33
+RPI_BPLUS_GPIO_J8_35:  19  ;; B+, Pin J8-35, can be PWM channel 1 in ALT FUN 5
+RPI_BPLUS_GPIO_J8_36:  16  ;; B+, Pin J8-36 
+RPI_BPLUS_GPIO_J8_37:  26  ;; B+, Pin J8-37 
+RPI_BPLUS_GPIO_J8_38:  20  ;; B+, Pin J8-38 
+RPI_BPLUS_GPIO_J8_40:  21  ;; B+, Pin J8-40 
+
+;; bcm2835FunctionSelect:
+GPIO_FSEL_INPT:         0  ;; Input  0b000
+GPIO_FSEL_OUTP:         1  ;; Output 0b001
+GPIO_FSEL_ALT0:         4  ;; Alternate function 0 0b100
+GPIO_FSEL_ALT1:         5  ;; Alternate function 1 0b101
+GPIO_FSEL_ALT2:         6  ;; Alternate function 2 0b110
+GPIO_FSEL_ALT3:         7  ;; Alternate function 3 0b111
+GPIO_FSEL_ALT4:         3  ;; Alternate function 4 0b011
+GPIO_FSEL_ALT5:         2  ;; Alternate function 5 0b010
+GPIO_FSEL_MASK:         7  ;; Function select bits mask 0b111
+
+;; bcm2835PUDControl:
+GPIO_PUD_OFF:           0  ;; Off ? disable pull-up/down 0b00
+GPIO_PUD_DOWN:          1  ;; Enable Pull Down control 0b01
+GPIO_PUD_UP:            2  ;; Enable Pull Up control 0b10
+
+;; bcm2835PadGroup:
+PAD_GROUP_GPIO_0_27:    0  ;; Pad group for GPIO pads  0 to 27
+PAD_GROUP_GPIO_28_45:   1  ;; Pad group for GPIO pads 28 to 45
+PAD_GROUP_GPIO_46_53:   2  ;; Pad group for GPIO pads 46 to 53
+
+;; bcm2835SPIBitOrder:
+SPI_BIT_ORDER_LSBFIRST: 0  ;; LSB First
+SPI_BIT_ORDER_MSBFIRST: 1  ;; MSB First
+
+;; bcm2835SPIMode:
+SPI_MODE0:              0  ;; CPOL = 0, CPHA = 0
+SPI_MODE1:              1  ;; CPOL = 0, CPHA = 1
+SPI_MODE2:              2  ;; CPOL = 1, CPHA = 0
+SPI_MODE3:              3  ;; CPOL = 1, CPHA = 1
+
+;; bcm2835SPIChipSelect:
+SPI_CS0:                0  ;; Chip Select 0
+SPI_CS1:                1  ;; Chip Select 1
+SPI_CS2:                2  ;; Chip Select 2 (ie pins CS1 and CS2 are asserted)
+SPI_CS_NONE:            3  ;; No CS, control it yourself
+
+HIGH:                   1  ;; This means pin HIGH, true, 3.3volts on a pin.
+LOW:                    0  ;; This means pin LOW, false, 0volts on a pin.
+}
+
 
 header: {REBOL [Title: {Rebol BCM2835 Extension} Type: module]}
 enum-commands:  "enum ext_commands {"
@@ -257,129 +380,12 @@ new-line/all cmd-words false
 new-line/all arg-words false
 ;append header rejoin [{^/init-words words: } mold cmd-words #" " mold arg-words]
 ;append header {^/protect/hide 'init-words}
-append header {
-;; RPiGPIOPin:
-RPI_GPIO_P1_03:   0  ;; Version 1, Pin P1-03
-RPI_GPIO_P1_05:   1  ;; Version 1, Pin P1-05
-RPI_GPIO_P1_07:   4  ;; Version 1, Pin P1-07
-RPI_GPIO_P1_08:  14  ;; Version 1, Pin P1-08, defaults to alt function 0 UART0_TXD
-RPI_GPIO_P1_10:  15  ;; Version 1, Pin P1-10, defaults to alt function 0 UART0_RXD
-RPI_GPIO_P1_11:  17  ;; Version 1, Pin P1-11
-RPI_GPIO_P1_12:  18  ;; Version 1, Pin P1-12, can be PWM channel 0 in ALT FUN 5
-RPI_GPIO_P1_13:  21  ;; Version 1, Pin P1-13
-RPI_GPIO_P1_15:  22  ;; Version 1, Pin P1-15
-RPI_GPIO_P1_16:  23  ;; Version 1, Pin P1-16
-RPI_GPIO_P1_18:  24  ;; Version 1, Pin P1-18
-RPI_GPIO_P1_19:  10  ;; Version 1, Pin P1-19, MOSI when SPI0 in use
-RPI_GPIO_P1_21:   9  ;; Version 1, Pin P1-21, MISO when SPI0 in use
-RPI_GPIO_P1_22:  25  ;; Version 1, Pin P1-22
-RPI_GPIO_P1_23:  11  ;; Version 1, Pin P1-23, CLK when SPI0 in use
-RPI_GPIO_P1_24:   8  ;; Version 1, Pin P1-24, CE0 when SPI0 in use
-RPI_GPIO_P1_26:   7  ;; Version 1, Pin P1-26, CE1 when SPI0 in use
 
-;; RPi Version 2
-RPI_V2_GPIO_P1_03:   2  ;; Version 2, Pin P1-03
-RPI_V2_GPIO_P1_05:   3  ;; Version 2, Pin P1-05
-RPI_V2_GPIO_P1_07:   4  ;; Version 2, Pin P1-07
-RPI_V2_GPIO_P1_08:  14  ;; Version 2, Pin P1-08, defaults to alt function 0 UART0_TXD
-RPI_V2_GPIO_P1_10:  15  ;; Version 2, Pin P1-10, defaults to alt function 0 UART0_RXD
-RPI_V2_GPIO_P1_11:  17  ;; Version 2, Pin P1-11
-RPI_V2_GPIO_P1_12:  18  ;; Version 2, Pin P1-12, can be PWM channel 0 in ALT FUN 5
-RPI_V2_GPIO_P1_13:  27  ;; Version 2, Pin P1-13
-RPI_V2_GPIO_P1_15:  22  ;; Version 2, Pin P1-15
-RPI_V2_GPIO_P1_16:  23  ;; Version 2, Pin P1-16
-RPI_V2_GPIO_P1_18:  24  ;; Version 2, Pin P1-18
-RPI_V2_GPIO_P1_19:  10  ;; Version 2, Pin P1-19, MOSI when SPI0 in use
-RPI_V2_GPIO_P1_21:   9  ;; Version 2, Pin P1-21, MISO when SPI0 in use
-RPI_V2_GPIO_P1_22:  25  ;; Version 2, Pin P1-22
-RPI_V2_GPIO_P1_23:  11  ;; Version 2, Pin P1-23, CLK when SPI0 in use
-RPI_V2_GPIO_P1_24:   8  ;; Version 2, Pin P1-24, CE0 when SPI0 in use
-RPI_V2_GPIO_P1_26:   7  ;; Version 2, Pin P1-26, CE1 when SPI0 in use
-RPI_V2_GPIO_P1_29:   5  ;; Version 2, Pin P1-29
-RPI_V2_GPIO_P1_31:   6  ;; Version 2, Pin P1-31
-RPI_V2_GPIO_P1_32:  12  ;; Version 2, Pin P1-32
-RPI_V2_GPIO_P1_33:  13  ;; Version 2, Pin P1-33
-RPI_V2_GPIO_P1_35:  19  ;; Version 2, Pin P1-35, can be PWM channel 1 in ALT FUN 5 
-RPI_V2_GPIO_P1_36:  16  ;; Version 2, Pin P1-36
-RPI_V2_GPIO_P1_37:  26  ;; Version 2, Pin P1-37
-RPI_V2_GPIO_P1_38:  20  ;; Version 2, Pin P1-38
-RPI_V2_GPIO_P1_40:  21  ;; Version 2, Pin P1-40
-
-;; RPi Version 2, new plug P5
-RPI_V2_GPIO_P5_03:  28  ;; Version 2, Pin P5-03
-RPI_V2_GPIO_P5_04:  29  ;; Version 2, Pin P5-04
-RPI_V2_GPIO_P5_05:  30  ;; Version 2, Pin P5-05
-RPI_V2_GPIO_P5_06:  31  ;; Version 2, Pin P5-06
-
-;; RPi B+ J8 header, also RPi 2 40 pin GPIO header
-RPI_BPLUS_GPIO_J8_03:   2  ;; B+, Pin J8-03
-RPI_BPLUS_GPIO_J8_05:   3  ;; B+, Pin J8-05
-RPI_BPLUS_GPIO_J8_07:   4  ;; B+, Pin J8-07
-RPI_BPLUS_GPIO_J8_08:  14  ;; B+, Pin J8-08, defaults to alt function 0 UART0_TXD
-RPI_BPLUS_GPIO_J8_10:  15  ;; B+, Pin J8-10, defaults to alt function 0 UART0_RXD
-RPI_BPLUS_GPIO_J8_11:  17  ;; B+, Pin J8-11
-RPI_BPLUS_GPIO_J8_12:  18  ;; B+, Pin J8-12, can be PWM channel 0 in ALT FUN 5
-RPI_BPLUS_GPIO_J8_13:  27  ;; B+, Pin J8-13
-RPI_BPLUS_GPIO_J8_15:  22  ;; B+, Pin J8-15
-RPI_BPLUS_GPIO_J8_16:  23  ;; B+, Pin J8-16
-RPI_BPLUS_GPIO_J8_18:  24  ;; B+, Pin J8-18
-RPI_BPLUS_GPIO_J8_19:  10  ;; B+, Pin J8-19, MOSI when SPI0 in use
-RPI_BPLUS_GPIO_J8_21:   9  ;; B+, Pin J8-21, MISO when SPI0 in use
-RPI_BPLUS_GPIO_J8_22:  25  ;; B+, Pin J8-22
-RPI_BPLUS_GPIO_J8_23:  11  ;; B+, Pin J8-23, CLK when SPI0 in use
-RPI_BPLUS_GPIO_J8_24:   8  ;; B+, Pin J8-24, CE0 when SPI0 in use
-RPI_BPLUS_GPIO_J8_26:   7  ;; B+, Pin J8-26, CE1 when SPI0 in use
-RPI_BPLUS_GPIO_J8_29:   5  ;; B+, Pin J8-29
-RPI_BPLUS_GPIO_J8_31:   6  ;; B+, Pin J8-31
-RPI_BPLUS_GPIO_J8_32:  12  ;; B+, Pin J8-32
-RPI_BPLUS_GPIO_J8_33:  13  ;; B+, Pin J8-33
-RPI_BPLUS_GPIO_J8_35:  19  ;; B+, Pin J8-35, can be PWM channel 1 in ALT FUN 5
-RPI_BPLUS_GPIO_J8_36:  16  ;; B+, Pin J8-36 
-RPI_BPLUS_GPIO_J8_37:  26  ;; B+, Pin J8-37 
-RPI_BPLUS_GPIO_J8_38:  20  ;; B+, Pin J8-38 
-RPI_BPLUS_GPIO_J8_40:  21  ;; B+, Pin J8-40 
-
-;; bcm2835FunctionSelect:
-GPIO_FSEL_INPT:  0   ;; Input  0b000
-GPIO_FSEL_OUTP:  1   ;; Output 0b001
-GPIO_FSEL_ALT0:  4   ;; Alternate function 0 0b100
-GPIO_FSEL_ALT1:  5   ;; Alternate function 1 0b101
-GPIO_FSEL_ALT2:  6   ;; Alternate function 2 0b110
-GPIO_FSEL_ALT3:  7   ;; Alternate function 3 0b111
-GPIO_FSEL_ALT4:  3   ;; Alternate function 4 0b011
-GPIO_FSEL_ALT5:  2   ;; Alternate function 5 0b010
-GPIO_FSEL_MASK:  7   ;; Function select bits mask 0b111
-
-;; bcm2835PUDControl:
-GPIO_PUD_OFF:    0   ;; Off ? disable pull-up/down 0b00
-GPIO_PUD_DOWN:   1   ;; Enable Pull Down control 0b01
-GPIO_PUD_UP:     2   ;; Enable Pull Up control 0b10
-
-;; bcm2835PadGroup:
-PAD_GROUP_GPIO_0_27:  0  ;; Pad group for GPIO pads  0 to 27
-PAD_GROUP_GPIO_28_45: 1  ;; Pad group for GPIO pads 28 to 45
-PAD_GROUP_GPIO_46_53: 2  ;; Pad group for GPIO pads 46 to 53
-
-;; bcm2835SPIBitOrder:
-SPI_BIT_ORDER_LSBFIRST: 0 ;; LSB First
-SPI_BIT_ORDER_MSBFIRST: 1 ;; MSB First
-
-;; bcm2835SPIMode:
-SPI_MODE0: 0  ;; CPOL = 0, CPHA = 0
-SPI_MODE1: 1  ;; CPOL = 0, CPHA = 1
-SPI_MODE2: 2  ;; CPOL = 1, CPHA = 0
-SPI_MODE3: 3  ;; CPOL = 1, CPHA = 1
-
-;; bcm2835SPIChipSelect:
-SPI_CS0:     0  ;; Chip Select 0
-SPI_CS1:     1  ;; Chip Select 1
-SPI_CS2:     2  ;; Chip Select 2 (ie pins CS1 and CS2 are asserted)
-SPI_CS_NONE: 3  ;; No CS, control it yourself
-
-HIGH: 1
-LOW:  0
-
-}
+;; remove comments and unnecessary spaces from ext-values code
+tmp: next mold load ext-values
+replace/all tmp "^/    " LF
+take/last tmp ;; removes the ] char
+append header tmp
 
 ;print header
 
@@ -415,13 +421,11 @@ foreach line split header lf [
 	append out ajoin [{^/^-"} line {\n"\}] 
 ]
 take/last out ;; removes the last slash
-append out "^/"
-
+append out LF
 
 ;print out
 
 write %bcm2835-rebol-extension.h out
-
 write %bcm2835-commands-table.c reword {//
 // auto-generated file, do not modify!
 //
@@ -431,3 +435,52 @@ $cmd-dispatch};
 } self
 
 
+;; README documentation...
+doc: clear ""
+hdr: clear ""
+arg: clear ""
+cmd: desc: a: t: s: none
+parse commands [
+	any [
+		set cmd: set-word! into [
+			(clear hdr clear arg)
+			(append hdr ajoin [LF LF "#### `" cmd "`"])
+			set desc: opt string!
+			any [
+				set a word!
+				set t opt block!
+				set s opt string!
+				(
+					append hdr ajoin [" `:" a "`"]
+					append arg ajoin [LF "* `" a "`"] 
+					if t [append arg ajoin [" `" mold t "`"] ]
+					if s [append arg ajoin [" " s]]
+				)
+			]
+			(
+				append doc hdr
+				append doc LF
+				append doc any [desc ""]
+				append doc arg
+			)
+		]
+	]
+]
+
+;try/except [
+	readme: read/string %../README.md
+	readme: clear find/tail readme "## Extension commands:"
+	append readme ajoin [
+		LF doc
+		LF LF
+		LF "## Other extension values:"
+		LF "```rebol"
+		trim/tail ext-values
+		LF "```"
+		LF
+	]
+	write %../README.md head readme
+;][
+	print doc
+	print ext-values
+;]

@@ -161,125 +161,104 @@ typedef int (*MyCommandPointer)(RXIFRM *frm, void *ctx);
 	"set_debug: command [{Prevents access to the kernel memory, and does not do any peripheral access. Instead it prints out what it _would_ do if debug were 0.} state [logic! integer!]]\n"\
 	"delay: command [\"Delays for the specified number of milliseconds.\" millis [integer!] \"Delay in milliseconds\"]\n"\
 	"delayMicroseconds: command [\"Delays for the specified number of microseconds\" micros [integer!] \"Delay in microseconds\"]\n"\
-	";; RPiGPIOPin:\n"\
-	"RPI_GPIO_P1_03:   0  ;; Version 1, Pin P1-03\n"\
-	"RPI_GPIO_P1_05:   1  ;; Version 1, Pin P1-05\n"\
-	"RPI_GPIO_P1_07:   4  ;; Version 1, Pin P1-07\n"\
-	"RPI_GPIO_P1_08:  14  ;; Version 1, Pin P1-08, defaults to alt function 0 UART0_TXD\n"\
-	"RPI_GPIO_P1_10:  15  ;; Version 1, Pin P1-10, defaults to alt function 0 UART0_RXD\n"\
-	"RPI_GPIO_P1_11:  17  ;; Version 1, Pin P1-11\n"\
-	"RPI_GPIO_P1_12:  18  ;; Version 1, Pin P1-12, can be PWM channel 0 in ALT FUN 5\n"\
-	"RPI_GPIO_P1_13:  21  ;; Version 1, Pin P1-13\n"\
-	"RPI_GPIO_P1_15:  22  ;; Version 1, Pin P1-15\n"\
-	"RPI_GPIO_P1_16:  23  ;; Version 1, Pin P1-16\n"\
-	"RPI_GPIO_P1_18:  24  ;; Version 1, Pin P1-18\n"\
-	"RPI_GPIO_P1_19:  10  ;; Version 1, Pin P1-19, MOSI when SPI0 in use\n"\
-	"RPI_GPIO_P1_21:   9  ;; Version 1, Pin P1-21, MISO when SPI0 in use\n"\
-	"RPI_GPIO_P1_22:  25  ;; Version 1, Pin P1-22\n"\
-	"RPI_GPIO_P1_23:  11  ;; Version 1, Pin P1-23, CLK when SPI0 in use\n"\
-	"RPI_GPIO_P1_24:   8  ;; Version 1, Pin P1-24, CE0 when SPI0 in use\n"\
-	"RPI_GPIO_P1_26:   7  ;; Version 1, Pin P1-26, CE1 when SPI0 in use\n"\
-	"\n"\
-	";; RPi Version 2\n"\
-	"RPI_V2_GPIO_P1_03:   2  ;; Version 2, Pin P1-03\n"\
-	"RPI_V2_GPIO_P1_05:   3  ;; Version 2, Pin P1-05\n"\
-	"RPI_V2_GPIO_P1_07:   4  ;; Version 2, Pin P1-07\n"\
-	"RPI_V2_GPIO_P1_08:  14  ;; Version 2, Pin P1-08, defaults to alt function 0 UART0_TXD\n"\
-	"RPI_V2_GPIO_P1_10:  15  ;; Version 2, Pin P1-10, defaults to alt function 0 UART0_RXD\n"\
-	"RPI_V2_GPIO_P1_11:  17  ;; Version 2, Pin P1-11\n"\
-	"RPI_V2_GPIO_P1_12:  18  ;; Version 2, Pin P1-12, can be PWM channel 0 in ALT FUN 5\n"\
-	"RPI_V2_GPIO_P1_13:  27  ;; Version 2, Pin P1-13\n"\
-	"RPI_V2_GPIO_P1_15:  22  ;; Version 2, Pin P1-15\n"\
-	"RPI_V2_GPIO_P1_16:  23  ;; Version 2, Pin P1-16\n"\
-	"RPI_V2_GPIO_P1_18:  24  ;; Version 2, Pin P1-18\n"\
-	"RPI_V2_GPIO_P1_19:  10  ;; Version 2, Pin P1-19, MOSI when SPI0 in use\n"\
-	"RPI_V2_GPIO_P1_21:   9  ;; Version 2, Pin P1-21, MISO when SPI0 in use\n"\
-	"RPI_V2_GPIO_P1_22:  25  ;; Version 2, Pin P1-22\n"\
-	"RPI_V2_GPIO_P1_23:  11  ;; Version 2, Pin P1-23, CLK when SPI0 in use\n"\
-	"RPI_V2_GPIO_P1_24:   8  ;; Version 2, Pin P1-24, CE0 when SPI0 in use\n"\
-	"RPI_V2_GPIO_P1_26:   7  ;; Version 2, Pin P1-26, CE1 when SPI0 in use\n"\
-	"RPI_V2_GPIO_P1_29:   5  ;; Version 2, Pin P1-29\n"\
-	"RPI_V2_GPIO_P1_31:   6  ;; Version 2, Pin P1-31\n"\
-	"RPI_V2_GPIO_P1_32:  12  ;; Version 2, Pin P1-32\n"\
-	"RPI_V2_GPIO_P1_33:  13  ;; Version 2, Pin P1-33\n"\
-	"RPI_V2_GPIO_P1_35:  19  ;; Version 2, Pin P1-35, can be PWM channel 1 in ALT FUN 5 \n"\
-	"RPI_V2_GPIO_P1_36:  16  ;; Version 2, Pin P1-36\n"\
-	"RPI_V2_GPIO_P1_37:  26  ;; Version 2, Pin P1-37\n"\
-	"RPI_V2_GPIO_P1_38:  20  ;; Version 2, Pin P1-38\n"\
-	"RPI_V2_GPIO_P1_40:  21  ;; Version 2, Pin P1-40\n"\
-	"\n"\
-	";; RPi Version 2, new plug P5\n"\
-	"RPI_V2_GPIO_P5_03:  28  ;; Version 2, Pin P5-03\n"\
-	"RPI_V2_GPIO_P5_04:  29  ;; Version 2, Pin P5-04\n"\
-	"RPI_V2_GPIO_P5_05:  30  ;; Version 2, Pin P5-05\n"\
-	"RPI_V2_GPIO_P5_06:  31  ;; Version 2, Pin P5-06\n"\
-	"\n"\
-	";; RPi B+ J8 header, also RPi 2 40 pin GPIO header\n"\
-	"RPI_BPLUS_GPIO_J8_03:   2  ;; B+, Pin J8-03\n"\
-	"RPI_BPLUS_GPIO_J8_05:   3  ;; B+, Pin J8-05\n"\
-	"RPI_BPLUS_GPIO_J8_07:   4  ;; B+, Pin J8-07\n"\
-	"RPI_BPLUS_GPIO_J8_08:  14  ;; B+, Pin J8-08, defaults to alt function 0 UART0_TXD\n"\
-	"RPI_BPLUS_GPIO_J8_10:  15  ;; B+, Pin J8-10, defaults to alt function 0 UART0_RXD\n"\
-	"RPI_BPLUS_GPIO_J8_11:  17  ;; B+, Pin J8-11\n"\
-	"RPI_BPLUS_GPIO_J8_12:  18  ;; B+, Pin J8-12, can be PWM channel 0 in ALT FUN 5\n"\
-	"RPI_BPLUS_GPIO_J8_13:  27  ;; B+, Pin J8-13\n"\
-	"RPI_BPLUS_GPIO_J8_15:  22  ;; B+, Pin J8-15\n"\
-	"RPI_BPLUS_GPIO_J8_16:  23  ;; B+, Pin J8-16\n"\
-	"RPI_BPLUS_GPIO_J8_18:  24  ;; B+, Pin J8-18\n"\
-	"RPI_BPLUS_GPIO_J8_19:  10  ;; B+, Pin J8-19, MOSI when SPI0 in use\n"\
-	"RPI_BPLUS_GPIO_J8_21:   9  ;; B+, Pin J8-21, MISO when SPI0 in use\n"\
-	"RPI_BPLUS_GPIO_J8_22:  25  ;; B+, Pin J8-22\n"\
-	"RPI_BPLUS_GPIO_J8_23:  11  ;; B+, Pin J8-23, CLK when SPI0 in use\n"\
-	"RPI_BPLUS_GPIO_J8_24:   8  ;; B+, Pin J8-24, CE0 when SPI0 in use\n"\
-	"RPI_BPLUS_GPIO_J8_26:   7  ;; B+, Pin J8-26, CE1 when SPI0 in use\n"\
-	"RPI_BPLUS_GPIO_J8_29:   5  ;; B+, Pin J8-29\n"\
-	"RPI_BPLUS_GPIO_J8_31:   6  ;; B+, Pin J8-31\n"\
-	"RPI_BPLUS_GPIO_J8_32:  12  ;; B+, Pin J8-32\n"\
-	"RPI_BPLUS_GPIO_J8_33:  13  ;; B+, Pin J8-33\n"\
-	"RPI_BPLUS_GPIO_J8_35:  19  ;; B+, Pin J8-35, can be PWM channel 1 in ALT FUN 5\n"\
-	"RPI_BPLUS_GPIO_J8_36:  16  ;; B+, Pin J8-36 \n"\
-	"RPI_BPLUS_GPIO_J8_37:  26  ;; B+, Pin J8-37 \n"\
-	"RPI_BPLUS_GPIO_J8_38:  20  ;; B+, Pin J8-38 \n"\
-	"RPI_BPLUS_GPIO_J8_40:  21  ;; B+, Pin J8-40 \n"\
-	"\n"\
-	";; bcm2835FunctionSelect:\n"\
-	"GPIO_FSEL_INPT:  0   ;; Input  0b000\n"\
-	"GPIO_FSEL_OUTP:  1   ;; Output 0b001\n"\
-	"GPIO_FSEL_ALT0:  4   ;; Alternate function 0 0b100\n"\
-	"GPIO_FSEL_ALT1:  5   ;; Alternate function 1 0b101\n"\
-	"GPIO_FSEL_ALT2:  6   ;; Alternate function 2 0b110\n"\
-	"GPIO_FSEL_ALT3:  7   ;; Alternate function 3 0b111\n"\
-	"GPIO_FSEL_ALT4:  3   ;; Alternate function 4 0b011\n"\
-	"GPIO_FSEL_ALT5:  2   ;; Alternate function 5 0b010\n"\
-	"GPIO_FSEL_MASK:  7   ;; Function select bits mask 0b111\n"\
-	"\n"\
-	";; bcm2835PUDControl:\n"\
-	"GPIO_PUD_OFF:    0   ;; Off ? disable pull-up/down 0b00\n"\
-	"GPIO_PUD_DOWN:   1   ;; Enable Pull Down control 0b01\n"\
-	"GPIO_PUD_UP:     2   ;; Enable Pull Up control 0b10\n"\
-	"\n"\
-	";; bcm2835PadGroup:\n"\
-	"PAD_GROUP_GPIO_0_27:  0  ;; Pad group for GPIO pads  0 to 27\n"\
-	"PAD_GROUP_GPIO_28_45: 1  ;; Pad group for GPIO pads 28 to 45\n"\
-	"PAD_GROUP_GPIO_46_53: 2  ;; Pad group for GPIO pads 46 to 53\n"\
-	"\n"\
-	";; bcm2835SPIBitOrder:\n"\
-	"SPI_BIT_ORDER_LSBFIRST: 0 ;; LSB First\n"\
-	"SPI_BIT_ORDER_MSBFIRST: 1 ;; MSB First\n"\
-	"\n"\
-	";; bcm2835SPIMode:\n"\
-	"SPI_MODE0: 0  ;; CPOL = 0, CPHA = 0\n"\
-	"SPI_MODE1: 1  ;; CPOL = 0, CPHA = 1\n"\
-	"SPI_MODE2: 2  ;; CPOL = 1, CPHA = 0\n"\
-	"SPI_MODE3: 3  ;; CPOL = 1, CPHA = 1\n"\
-	"\n"\
-	";; bcm2835SPIChipSelect:\n"\
-	"SPI_CS0:     0  ;; Chip Select 0\n"\
-	"SPI_CS1:     1  ;; Chip Select 1\n"\
-	"SPI_CS2:     2  ;; Chip Select 2 (ie pins CS1 and CS2 are asserted)\n"\
-	"SPI_CS_NONE: 3  ;; No CS, control it yourself\n"\
-	"\n"\
+	"RPI_GPIO_P1_03: 0\n"\
+	"RPI_GPIO_P1_05: 1\n"\
+	"RPI_GPIO_P1_07: 4\n"\
+	"RPI_GPIO_P1_08: 14\n"\
+	"RPI_GPIO_P1_10: 15\n"\
+	"RPI_GPIO_P1_11: 17\n"\
+	"RPI_GPIO_P1_12: 18\n"\
+	"RPI_GPIO_P1_13: 21\n"\
+	"RPI_GPIO_P1_15: 22\n"\
+	"RPI_GPIO_P1_16: 23\n"\
+	"RPI_GPIO_P1_18: 24\n"\
+	"RPI_GPIO_P1_19: 10\n"\
+	"RPI_GPIO_P1_21: 9\n"\
+	"RPI_GPIO_P1_22: 25\n"\
+	"RPI_GPIO_P1_23: 11\n"\
+	"RPI_GPIO_P1_24: 8\n"\
+	"RPI_GPIO_P1_26: 7\n"\
+	"RPI_V2_GPIO_P1_03: 2\n"\
+	"RPI_V2_GPIO_P1_05: 3\n"\
+	"RPI_V2_GPIO_P1_07: 4\n"\
+	"RPI_V2_GPIO_P1_08: 14\n"\
+	"RPI_V2_GPIO_P1_10: 15\n"\
+	"RPI_V2_GPIO_P1_11: 17\n"\
+	"RPI_V2_GPIO_P1_12: 18\n"\
+	"RPI_V2_GPIO_P1_13: 27\n"\
+	"RPI_V2_GPIO_P1_15: 22\n"\
+	"RPI_V2_GPIO_P1_16: 23\n"\
+	"RPI_V2_GPIO_P1_18: 24\n"\
+	"RPI_V2_GPIO_P1_19: 10\n"\
+	"RPI_V2_GPIO_P1_21: 9\n"\
+	"RPI_V2_GPIO_P1_22: 25\n"\
+	"RPI_V2_GPIO_P1_23: 11\n"\
+	"RPI_V2_GPIO_P1_24: 8\n"\
+	"RPI_V2_GPIO_P1_26: 7\n"\
+	"RPI_V2_GPIO_P1_29: 5\n"\
+	"RPI_V2_GPIO_P1_31: 6\n"\
+	"RPI_V2_GPIO_P1_32: 12\n"\
+	"RPI_V2_GPIO_P1_33: 13\n"\
+	"RPI_V2_GPIO_P1_35: 19\n"\
+	"RPI_V2_GPIO_P1_36: 16\n"\
+	"RPI_V2_GPIO_P1_37: 26\n"\
+	"RPI_V2_GPIO_P1_38: 20\n"\
+	"RPI_V2_GPIO_P1_40: 21\n"\
+	"RPI_V2_GPIO_P5_03: 28\n"\
+	"RPI_V2_GPIO_P5_04: 29\n"\
+	"RPI_V2_GPIO_P5_05: 30\n"\
+	"RPI_V2_GPIO_P5_06: 31\n"\
+	"RPI_BPLUS_GPIO_J8_03: 2\n"\
+	"RPI_BPLUS_GPIO_J8_05: 3\n"\
+	"RPI_BPLUS_GPIO_J8_07: 4\n"\
+	"RPI_BPLUS_GPIO_J8_08: 14\n"\
+	"RPI_BPLUS_GPIO_J8_10: 15\n"\
+	"RPI_BPLUS_GPIO_J8_11: 17\n"\
+	"RPI_BPLUS_GPIO_J8_12: 18\n"\
+	"RPI_BPLUS_GPIO_J8_13: 27\n"\
+	"RPI_BPLUS_GPIO_J8_15: 22\n"\
+	"RPI_BPLUS_GPIO_J8_16: 23\n"\
+	"RPI_BPLUS_GPIO_J8_18: 24\n"\
+	"RPI_BPLUS_GPIO_J8_19: 10\n"\
+	"RPI_BPLUS_GPIO_J8_21: 9\n"\
+	"RPI_BPLUS_GPIO_J8_22: 25\n"\
+	"RPI_BPLUS_GPIO_J8_23: 11\n"\
+	"RPI_BPLUS_GPIO_J8_24: 8\n"\
+	"RPI_BPLUS_GPIO_J8_26: 7\n"\
+	"RPI_BPLUS_GPIO_J8_29: 5\n"\
+	"RPI_BPLUS_GPIO_J8_31: 6\n"\
+	"RPI_BPLUS_GPIO_J8_32: 12\n"\
+	"RPI_BPLUS_GPIO_J8_33: 13\n"\
+	"RPI_BPLUS_GPIO_J8_35: 19\n"\
+	"RPI_BPLUS_GPIO_J8_36: 16\n"\
+	"RPI_BPLUS_GPIO_J8_37: 26\n"\
+	"RPI_BPLUS_GPIO_J8_38: 20\n"\
+	"RPI_BPLUS_GPIO_J8_40: 21\n"\
+	"GPIO_FSEL_INPT: 0\n"\
+	"GPIO_FSEL_OUTP: 1\n"\
+	"GPIO_FSEL_ALT0: 4\n"\
+	"GPIO_FSEL_ALT1: 5\n"\
+	"GPIO_FSEL_ALT2: 6\n"\
+	"GPIO_FSEL_ALT3: 7\n"\
+	"GPIO_FSEL_ALT4: 3\n"\
+	"GPIO_FSEL_ALT5: 2\n"\
+	"GPIO_FSEL_MASK: 7\n"\
+	"GPIO_PUD_OFF: 0\n"\
+	"GPIO_PUD_DOWN: 1\n"\
+	"GPIO_PUD_UP: 2\n"\
+	"PAD_GROUP_GPIO_0_27: 0\n"\
+	"PAD_GROUP_GPIO_28_45: 1\n"\
+	"PAD_GROUP_GPIO_46_53: 2\n"\
+	"SPI_BIT_ORDER_LSBFIRST: 0\n"\
+	"SPI_BIT_ORDER_MSBFIRST: 1\n"\
+	"SPI_MODE0: 0\n"\
+	"SPI_MODE1: 1\n"\
+	"SPI_MODE2: 2\n"\
+	"SPI_MODE3: 3\n"\
+	"SPI_CS0: 0\n"\
+	"SPI_CS1: 1\n"\
+	"SPI_CS2: 2\n"\
+	"SPI_CS_NONE: 3\n"\
 	"HIGH: 1\n"\
-	"LOW:  0\n"\
-	"\n"\
+	"LOW: 0\n"\
 	"\n"
