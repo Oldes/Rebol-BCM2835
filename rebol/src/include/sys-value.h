@@ -89,6 +89,7 @@ enum {
 #define VAL_CLR_LINE(v)		VAL_CLR_OPT((v), OPTS_LINE)
 
 #define VAL_PROTECTED(v)	VAL_GET_OPT((v), OPTS_LOCK)
+#define VAL_HIDDEN(v)	    VAL_GET_OPT((v), OPTS_HIDE)
 
 // Used for datatype-dependent data (e.g. op! stores action!)
 #define VAL_GET_EXT(v)		((v)->flags.flags.exts)
@@ -135,7 +136,8 @@ typedef struct Reb_Type {
 #define NONE_VALUE		ROOT_NONEVAL
 
 #define VAL_INT32(v)	(REBINT)((v)->data.integer)
-#define VAL_INT64(v)	((v)->data.integer)
+#define VAL_INT64(v)    ((v)->data.integer)
+#define VAL_UNT32(v)    (REBCNT)((v)->data.integer)
 #define VAL_UNT64(v)	((v)->data.unteger)
 #define	SET_INTEGER(v,n) VAL_SET(v, REB_INTEGER), ((v)->data.integer) = (n)
 #define	SET_INT32(v,n)  ((v)->data.integer) = (REBINT)(n)
@@ -145,6 +147,8 @@ typedef struct Reb_Type {
 #define	SET_CHAR(v,n)	VAL_SET(v, REB_CHAR), VAL_CHAR(v) = (REBUNI)(n)
 
 #define IS_NUMBER(v)	(VAL_TYPE(v) == REB_INTEGER || VAL_TYPE(v) == REB_DECIMAL)
+#define	AS_INT32(v)     (IS_INTEGER(v) ? VAL_INT32(v) : (REBINT)VAL_DECIMAL(v))
+#define	AS_INT64(v)     (IS_INTEGER(v) ? VAL_INT64(v) : (REBI64)VAL_DECIMAL(v))
 
 
 /***********************************************************************
@@ -255,9 +259,9 @@ typedef struct Reb_Tuple {
 	REBYTE tuple[12];
 } REBTUP;
 
-#define	VAL_TUPLE(v)	((v)->data.tuple.tuple+1)
-#define	VAL_TUPLE_LEN(v) ((v)->data.tuple.tuple[0])
-#define MAX_TUPLE 10
+#define	VAL_TUPLE(v)	((v)->data.tuple.tuple)
+#define	VAL_TUPLE_LEN(v) (VAL_GET_EXT(v))
+#define MAX_TUPLE 12
 
 
 /***********************************************************************
@@ -367,7 +371,7 @@ static REBCNT byte_sizes[4] = { 1, 2, 4, 8 };
 #define VECT_TYPE(s) ((s)->size & 0xff)
 #define VECT_BIT_SIZE(bits) (bit_sizes[bits & 3])
 #define VECT_BYTE_SIZE(bits) (byte_sizes[bits & 3])
-
+#define VAL_VEC_WIDTH(v) VECT_BYTE_SIZE(VECT_TYPE(VAL_SERIES(v)))
 
 
 
@@ -603,8 +607,6 @@ typedef struct Reb_Series_Ref
 #define VAL_BIN_DATA(v)	BIN_SKIP(VAL_SERIES(v), VAL_INDEX(v))
 #define VAL_BIN_SKIP(v,n) BIN_SKIP(VAL_SERIES(v), (n))
 #define VAL_BIN_TAIL(v)	BIN_SKIP(VAL_SERIES(v), VAL_SERIES(v)->tail)
-
-#define VAL_VEC_WIDTH(v) (VAL_SERIES(v)->info)
 
 // Arg is a unicode value:
 #define VAL_UNI(v)		UNI_HEAD(VAL_SERIES(v))
@@ -985,7 +987,7 @@ typedef struct rebol_compositor_ctx REBCMP; // Rebol compositor context
 typedef int  (*REBFUN)(REBVAL *ds);				// Native function
 typedef int  (*REBACT)(REBVAL *ds, REBCNT a);	// Action function
 typedef void (*REBDOF)(REBVAL *ds);				// DO evaltype dispatch function
-typedef int  (*REBPAF)(REBVAL *ds, REBSER *p, REBCNT a); // Port action func
+typedef int  (*REBPAF)(REBVAL *ds, REBVAL *p, REBCNT a); // Port action func
 
 typedef int     (*REB_HANDLE_FREE_FUNC)(void *hnd);
 typedef REBSER* (*REB_HANDLE_MOLD_FUNC)(REBSER *mold, void *hnd); //TODO: not used yet!
@@ -1089,10 +1091,7 @@ typedef struct Reb_Handle_Spec {
 } REBHSP;
 
 typedef struct Reb_Handle_Context {
-	union {
-		REBYTE *data;
-		void *handle;
-	};
+	REBYTE *data;
 	REBCNT  sym;      // Index of the word's symbol. Used as a handle's type!
 	REBFLG  flags:16; // Handle_Flags (HANDLE_CONTEXT_MARKED and HANDLE_CONTEXT_USED)
 	REBCNT  index:16; // Index into Reb_Handle_Spec value
@@ -1136,7 +1135,7 @@ typedef struct Reb_Handle {
 #define MAKE_HANDLE(v, t) SET_HANDLE(v, Make_Handle_Context(t), t, HANDLE_CONTEXT)
 
 #define IS_USED_HOB(h)         ((h)->flags &   HANDLE_CONTEXT_USED)   // used to detect if handle's context is still valid
-#define     USE_HOB(h)         ((h)->flags |=  HANDLE_CONTEXT_USED)
+#define     USE_HOB(h)         ((h)->flags |=  HANDLE_CONTEXT_USED | HANDLE_CONTEXT_MARKED)
 #define   UNUSE_HOB(h)         ((h)->flags &= ~HANDLE_CONTEXT_USED)
 #define IS_MARK_HOB(h)         ((h)->flags &  (HANDLE_CONTEXT_MARKED | HANDLE_CONTEXT_LOCKED)) // GC marks still used handles, so these are not released
 #define    MARK_HOB(h)         ((h)->flags |=  HANDLE_CONTEXT_MARKED)
@@ -1211,16 +1210,15 @@ typedef struct Reb_Typeset {
 
 typedef struct Reb_Struct {
 	REBSER	*spec;
-	REBSER	*vals;
+	REBSER  *fields;	// fields definition
 	REBSER	*data;
 } REBSTU;
 
 #define VAL_STRUCT(v)       (v->data.structure)
 #define VAL_STRUCT_SPEC(v)  (v->data.structure.spec)
-#define VAL_STRUCT_VALS(v)  (v->data.structure.vals)
+#define VAL_STRUCT_FIELDS(v) ((v)->data.structure.fields)
 #define VAL_STRUCT_DATA(v)  (v->data.structure.data)
 #define VAL_STRUCT_DP(v)    (STR_HEAD(VAL_STRUCT_DATA(v)))
-#define VAL_STRUCT_LEN(v)   (SERIES_TAIL(VAL_STRUCT_DATA(v)))
 
 /***********************************************************************
 **

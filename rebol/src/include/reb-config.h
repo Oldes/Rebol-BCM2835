@@ -167,6 +167,7 @@ These are now obsolete (as of A107) and should be removed:
 #define INLINE
 
 #ifdef TO_OSX_X64
+#define TO_OSX
 #define FINITE isfinite
 #else
 #define FINITE finite
@@ -209,10 +210,14 @@ These are now obsolete (as of A107) and should be removed:
 #define USE_SETENV 
 #endif
 
-#ifdef TO_OBSD					// OpenBSD
+#ifdef TO_OPENBSD				// OpenBSD
 #undef INCLUDE_MIDI_DEVICE      // Not implemented!
-#define COPY_STR(d,s,m) strlcpy(d,s,m)
-#define JOIN_STR(d,s,m) strlcat(d,s,m)
+#define USE_SETENV 
+#endif
+
+#ifdef TO_FREEBSD				// FreeBSD
+#undef INCLUDE_MIDI_DEVICE      // Not implemented!
+#define USE_SETENV 
 #endif
 
 #ifdef TO_AMIGA					// Target for OS4

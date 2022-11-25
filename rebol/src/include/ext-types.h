@@ -10,8 +10,8 @@
 ************************************************************************
 **
 **  Title: Extension Types (Isolators)
-**  Build: 3.5.3
-**  Date:  4-May-2021
+**  Build: 3.10.0
+**  Date:  16-Nov-2022
 **  File:  ext-types.h
 **
 **  AUTO-GENERATED FILE - Do not modify. (From: make-boot.reb)
