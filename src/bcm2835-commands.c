@@ -23,12 +23,6 @@
 #define ARG_UINT64(n)           ((uint64_t)RXA_INT64(frm,n))
 
 
-COMMAND cmd_version(RXIFRM *frm, void *ctx) {
-	RXA_TYPE(frm,1) = RXT_INTEGER;
-	RXA_ARG(frm,1).int64 = bcm2835_version();
-	return RXR_VALUE;
-}
-
 COMMAND cmd_gpio_fsel(RXIFRM *frm, void *ctx) {
 	bcm2835_gpio_fsel(ARG_UINT8(1), ARG_UINT8(2));
 	return RXR_UNSET;
@@ -280,6 +274,18 @@ COMMAND cmd_spi_write(RXIFRM *frm, void *ctx) {
 }
 
 //===========================================================================
+
+
+COMMAND cmd_version(RXIFRM *frm, void *ctx) {
+	RXA_TYPE(frm,1) = RXT_INTEGER;
+	RXA_ARG(frm,1).int64 = bcm2835_version();
+	return RXR_VALUE;
+}
+
+COMMAND cmd_set_debug(RXIFRM *frm, void *ctx) {
+	bcm2835_set_debug(ARG_UINT8(1));
+	return RXR_UNSET;
+}
 
 COMMAND cmd_delay(RXIFRM *frm, void *ctx) {
 	bcm2835_delay(ARG_UINT32(1));

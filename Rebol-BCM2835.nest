@@ -9,25 +9,10 @@ version: 1.71.0
 ;strip: on
 
 define: USE_TRACES
-
-;- options common for all Rebol extensions ----------------------
-#if Windows? [
-	define: _CRT_SECURE_NO_WARNINGS
-]
-#if macOS?   [
-	define: TO_OSX
-	define: HAS_BOOL
-]
-#if Linux? [
-	define: TO_LINUX
-]
-
 define: ENDIAN_LITTLE
 
 target-x86: [
 	arch: x86
-	#if Windows? [ defines: [ TO_WIN32 _WIN32 ] ]
-	#if Linux?   [ defines: [ TO_LINUX_X86    ] ]
 ]
 target-x64: [
 	arch: x64
@@ -35,22 +20,18 @@ target-x64: [
 		_FILE_OFFSET_BITS=64
 		__LP64__ ; has long (integer) 64 bits
 	]
-	#if Windows? [ defines: [ TO_WIN32_X64 _WIN32 ] ]
-	#if Linux?   [ defines: [ TO_LINUX_X64        ] ]
-	#if macOS?   [ defines: [ TO_OSX_X64          ] flags: ["-arch x86_64"] ]
+	#if macOS?   [ flag: "-arch x86_64" ]
 ]
 target-arm64: [
 	arch: arm64
-	;flags: ["-arch arm64"]
-	flags: "-target arm64-apple-darwin"
+	flag: "-march=armv8-a"
 	define: _FILE_OFFSET_BITS=64
 	define: __LP64__ ; has long (integer) 64 bits
 	define: __arm64__
-	;define: TO_OSX_X64
 ]
 target-armv7: [
 	arch: armv7
-	flag: "-march=armv7"
+	flag: "-march=armv7-a"
 ]
 ;----------------------------------------------------------------
 
@@ -67,12 +48,8 @@ include: [
 	%rebol/src/include/
 ]
 
-cflags:  [-fpermissive ]
-flags:   [-O2 shared ]
-
 #if Posix? [
-	cflags: [-fPIC -pthread ]
-	;libraries: [%pthread]
+	cflags: [-fPIC "-std=c99"]
 ]
 
 ;- generate main extension header --------------------------------
@@ -84,10 +61,12 @@ eggs: only [
 		"Rebol bcm2835 extension: linux_armv7" [
 			name: %bcm2835-linux-armv7
 			:target-armv7
+			flag: shared
 		]
 		"Rebol bcm2835 extension: linux_arm64" [
 			name: %bcm2835-linux-arm64
 			:target-arm64
+			flag: shared
 		]
 	]
 ]

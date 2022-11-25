@@ -39,10 +39,8 @@ RXIEXT const char *RX_Init(int opts, RL_LIB *lib) {
 		trace("CHECK_STRUCT_ALIGN failed!");
 		return 0;
 	}
-	bcm2835_set_debug(1);
-	if (!bcm2835_init()) {
-		return 0;
-	}
+	if (!bcm2835_init()) return 0;
+	
 	return init_block;
 }
 

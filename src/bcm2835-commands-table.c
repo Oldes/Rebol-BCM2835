@@ -47,6 +47,7 @@ MyCommandPointer Command[] = {
 	cmd_spi_transfer,
 	cmd_spi_write,
 	cmd_version,
+	cmd_set_debug,
 	cmd_delay,
 	cmd_delayMicroseconds,
 };

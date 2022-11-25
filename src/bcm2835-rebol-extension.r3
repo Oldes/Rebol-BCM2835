@@ -204,6 +204,10 @@ commands: [
 	;- Utilities                                                                                    
 	;-----------------------------------------------------------------------------------------------
 	version: ["Returns the bcm2835 version."]
+	set_debug: [
+		"Prevents access to the kernel memory, and does not do any peripheral access. Instead it prints out what it _would_ do if debug were 0."
+		state [logic! integer!]
+	]
 	delay: [
 		"Delays for the specified number of milliseconds."
 		millis [integer!] "Delay in milliseconds"
@@ -215,7 +219,7 @@ commands: [
 ]
 
 
-header: {REBOL [Title: {Rebol OpenCV Extension} Type: module Exports: []]}
+header: {REBOL [Title: {Rebol BCM2835 Extension} Type: module]}
 enum-commands:  "enum ext_commands {"
 enum-cmd-words: "enum ext_cmd_words {W_BCM2835_CMD_0,"
 enum-arg-words: "enum ext_arg_words {W_BCM2835_ARG_0,"
@@ -251,7 +255,7 @@ foreach [name spec] commands [
 
 new-line/all cmd-words false
 new-line/all arg-words false
-append header rejoin [{^/init-words words: } mold cmd-words #" " mold arg-words]
+;append header rejoin [{^/init-words words: } mold cmd-words #" " mold arg-words]
 append header {^/protect/hide 'init-words}
 append header {
 ;; RPiGPIOPin:
@@ -371,6 +375,10 @@ SPI_CS0:     0  ;; Chip Select 0
 SPI_CS1:     1  ;; Chip Select 1
 SPI_CS2:     2  ;; Chip Select 2 (ie pins CS1 and CS2 are asserted)
 SPI_CS_NONE: 3  ;; No CS, control it yourself
+
+HIGH: 1
+LOW:  0
+
 }
 
 ;print header
@@ -406,6 +414,7 @@ foreach line split header lf [
 	replace/all line #"^"" {\"}
 	append out ajoin [{^/^-"} line {\n"\}] 
 ]
+take/last out ;; removes the last slash
 append out "^/"
 
 

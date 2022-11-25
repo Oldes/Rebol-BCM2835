@@ -55,6 +55,7 @@ enum ext_commands {
 	CMD_BCM2835_SPI_TRANSFER,
 	CMD_BCM2835_SPI_WRITE,
 	CMD_BCM2835_VERSION,
+	CMD_BCM2835_SET_DEBUG,
 	CMD_BCM2835_DELAY,
 	CMD_BCM2835_DELAYMICROSECONDS,
 };
@@ -108,13 +109,14 @@ int cmd_spi_setChipSelectPolarity(RXIFRM *frm, void *ctx);
 int cmd_spi_transfer(RXIFRM *frm, void *ctx);
 int cmd_spi_write(RXIFRM *frm, void *ctx);
 int cmd_version(RXIFRM *frm, void *ctx);
+int cmd_set_debug(RXIFRM *frm, void *ctx);
 int cmd_delay(RXIFRM *frm, void *ctx);
 int cmd_delayMicroseconds(RXIFRM *frm, void *ctx);
 
 typedef int (*MyCommandPointer)(RXIFRM *frm, void *ctx);
 
 #define BCM2835_EXT_INIT_CODE \
-	"REBOL [Title: {Rebol OpenCV Extension} Type: module Exports: []]\n"\
+	"REBOL [Title: {Rebol BCM2835 Extension} Type: module]\n"\
 	"init-words: command [cmd-words [block!] arg-words [block!]]\n"\
 	"gpio_fsel: command [{Sets the Function Select register for the given pin, which configures the pin as Input, Output or one of the 6 alternate functions.} pin [integer!] \"GPIO number, or one of RPI_GPIO_P1_*\" mode [integer!] \"Mode to set the pin to, one of GPIO_FSEL_*\"]\n"\
 	"gpio_set: command [\"Sets the specified pin output to HIGH.\" pin [integer!] \"GPIO number, or one of RPI_GPIO_P1_*\"]\n"\
@@ -159,9 +161,9 @@ typedef int (*MyCommandPointer)(RXIFRM *frm, void *ctx);
 	"spi_transfer: command [{Transfers one byte to and from the currently selected SPI slave. Asserts the currently selected CS pins (as previously set by bcm2835_spi_chipSelect) during the transfer. Clocks the 8 bit value out on MOSI, and simultaneously clocks in data from MISO. Returns the read data byte from the slave.} value [integer! char! binary!] \"The 8 bit data byte to write to MOSI, or buffer\"]\n"\
 	"spi_write: command [{Transfers any number of bytes to the currently selected SPI slave.} data [binary! integer! char!] {Buffer of bytes to send or the 8 bit data byte to write to MOSI}]\n"\
 	"version: command [\"Returns the bcm2835 version.\"]\n"\
+	"set_debug: command [state [logic! integer!]]\n"\
 	"delay: command [\"Delays for the specified number of milliseconds.\" millis [integer!] \"Delay in milliseconds\"]\n"\
 	"delayMicroseconds: command [\"Delays for the specified number of microseconds\" micros [integer!] \"Delay in microseconds\"]\n"\
-	"init-words words: [] []\n"\
 	"protect/hide 'init-words\n"\
 	";; RPiGPIOPin:\n"\
 	"RPI_GPIO_P1_03:   0  ;; Version 1, Pin P1-03\n"\
@@ -281,3 +283,7 @@ typedef int (*MyCommandPointer)(RXIFRM *frm, void *ctx);
 	"SPI_CS2:     2  ;; Chip Select 2 (ie pins CS1 and CS2 are asserted)\n"\
 	"SPI_CS_NONE: 3  ;; No CS, control it yourself\n"\
 	"\n"\
+	"HIGH: 1\n"\
+	"LOW:  0\n"\
+	"\n"\
+	"\n"
