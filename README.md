@@ -13,7 +13,7 @@ So far tested only with [RPi Relay Board](https://www.waveshare.com/wiki/RPi_Rel
 ```rebol
 bcm: import 'bcm2835
 
-pins: [5 6 13 16 19 20 21 26]
+pins: [5 6 13 16 19 20 21 26] ;; BCM pin numbers
 with bcm [
 	;; Set all pins to an output mode
 	forall pins	[
