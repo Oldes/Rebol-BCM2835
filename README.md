@@ -5,6 +5,10 @@ Broadcom BCM 2835 extension for [Rebol3](https://github.com/Oldes/Rebol3).
 
 Using Mike McCauley's C code taken from: https://www.airspayce.com/mikem/bcm2835/
 
+This extension is useful only on Raspberry PI or devices with the Broadcom chip.
+So far tested only with [RPi Relay Board](https://www.waveshare.com/wiki/RPi_Relay_Board_(B)).
+
+
 ## Usage example:
 ```rebol
 bcm: import 'bcm2835
