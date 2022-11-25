@@ -10,7 +10,7 @@ arg-words: [
 
 commands: [
 	; init-words is internal extension initialization (for mapping Rebol words to local equivalents)
-	init-words: [cmd-words [block!] arg-words [block!]]
+	; init-words: [cmd-words [block!] arg-words [block!]]
 
 	;-----------------------------------------------------------------------------------------------
 	;- GPIO register access                                                                         
@@ -256,7 +256,7 @@ foreach [name spec] commands [
 new-line/all cmd-words false
 new-line/all arg-words false
 ;append header rejoin [{^/init-words words: } mold cmd-words #" " mold arg-words]
-append header {^/protect/hide 'init-words}
+;append header {^/protect/hide 'init-words}
 append header {
 ;; RPiGPIOPin:
 RPI_GPIO_P1_03:   0  ;; Version 1, Pin P1-03

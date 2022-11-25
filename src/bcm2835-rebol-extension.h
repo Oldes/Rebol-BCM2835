@@ -11,7 +11,6 @@
 #define MIN_REBOL_VERSION VERSION(MIN_REBOL_VER, MIN_REBOL_REV, MIN_REBOL_UPD)
 
 enum ext_commands {
-	CMD_BCM2835_INIT_WORDS,
 	CMD_BCM2835_GPIO_FSEL,
 	CMD_BCM2835_GPIO_SET,
 	CMD_BCM2835_GPIO_CLR,
@@ -65,7 +64,6 @@ enum ext_arg_words {W_BCM2835_ARG_0,
 };
 
 
-int cmd_init_words(RXIFRM *frm, void *ctx);
 int cmd_gpio_fsel(RXIFRM *frm, void *ctx);
 int cmd_gpio_set(RXIFRM *frm, void *ctx);
 int cmd_gpio_clr(RXIFRM *frm, void *ctx);
@@ -117,7 +115,6 @@ typedef int (*MyCommandPointer)(RXIFRM *frm, void *ctx);
 
 #define BCM2835_EXT_INIT_CODE \
 	"REBOL [Title: {Rebol BCM2835 Extension} Type: module]\n"\
-	"init-words: command [cmd-words [block!] arg-words [block!]]\n"\
 	"gpio_fsel: command [{Sets the Function Select register for the given pin, which configures the pin as Input, Output or one of the 6 alternate functions.} pin [integer!] \"GPIO number, or one of RPI_GPIO_P1_*\" mode [integer!] \"Mode to set the pin to, one of GPIO_FSEL_*\"]\n"\
 	"gpio_set: command [\"Sets the specified pin output to HIGH.\" pin [integer!] \"GPIO number, or one of RPI_GPIO_P1_*\"]\n"\
 	"gpio_clr: command [\"Sets the specified pin output to LOW.\" pin [integer!] \"GPIO number, or one of RPI_GPIO_P1_*\"]\n"\
@@ -164,7 +161,6 @@ typedef int (*MyCommandPointer)(RXIFRM *frm, void *ctx);
 	"set_debug: command [{Prevents access to the kernel memory, and does not do any peripheral access. Instead it prints out what it _would_ do if debug were 0.} state [logic! integer!]]\n"\
 	"delay: command [\"Delays for the specified number of milliseconds.\" millis [integer!] \"Delay in milliseconds\"]\n"\
 	"delayMicroseconds: command [\"Delays for the specified number of microseconds\" micros [integer!] \"Delay in microseconds\"]\n"\
-	"protect/hide 'init-words\n"\
 	";; RPiGPIOPin:\n"\
 	"RPI_GPIO_P1_03:   0  ;; Version 1, Pin P1-03\n"\
 	"RPI_GPIO_P1_05:   1  ;; Version 1, Pin P1-05\n"\

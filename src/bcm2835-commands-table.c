@@ -3,7 +3,6 @@
 //
 #include "bcm2835-rebol-extension.h"
 MyCommandPointer Command[] = {
-	cmd_init_words,
 	cmd_gpio_fsel,
 	cmd_gpio_set,
 	cmd_gpio_clr,
