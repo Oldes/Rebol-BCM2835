@@ -467,7 +467,7 @@ parse commands [
 	]
 ]
 
-;try/except [
+try/except [
 	readme: read/string %../README.md
 	readme: clear find/tail readme "## Extension commands:"
 	append readme ajoin [
@@ -480,7 +480,7 @@ parse commands [
 		LF
 	]
 	write %../README.md head readme
-;][
+][
 	print doc
 	print ext-values
-;]
+]
