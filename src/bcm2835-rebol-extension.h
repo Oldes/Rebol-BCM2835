@@ -5,8 +5,8 @@
 #include "common.h"
 
 #define MIN_REBOL_VER 3
-#define MIN_REBOL_REV 5
-#define MIN_REBOL_UPD 4
+#define MIN_REBOL_REV 9
+#define MIN_REBOL_UPD 0
 #define VERSION(a, b, c) (a << 16) + (b << 8) + c
 #define MIN_REBOL_VERSION VERSION(MIN_REBOL_VER, MIN_REBOL_REV, MIN_REBOL_UPD)
 
@@ -161,7 +161,7 @@ typedef int (*MyCommandPointer)(RXIFRM *frm, void *ctx);
 	"spi_transfer: command [{Transfers one byte to and from the currently selected SPI slave. Asserts the currently selected CS pins (as previously set by bcm2835_spi_chipSelect) during the transfer. Clocks the 8 bit value out on MOSI, and simultaneously clocks in data from MISO. Returns the read data byte from the slave.} value [integer! char! binary!] \"The 8 bit data byte to write to MOSI, or buffer\"]\n"\
 	"spi_write: command [{Transfers any number of bytes to the currently selected SPI slave.} data [binary! integer! char!] {Buffer of bytes to send or the 8 bit data byte to write to MOSI}]\n"\
 	"version: command [\"Returns the bcm2835 version.\"]\n"\
-	"set_debug: command [state [logic! integer!]]\n"\
+	"set_debug: command [{Prevents access to the kernel memory, and does not do any peripheral access. Instead it prints out what it _would_ do if debug were 0.} state [logic! integer!]]\n"\
 	"delay: command [\"Delays for the specified number of milliseconds.\" millis [integer!] \"Delay in milliseconds\"]\n"\
 	"delayMicroseconds: command [\"Delays for the specified number of microseconds\" micros [integer!] \"Delay in microseconds\"]\n"\
 	"protect/hide 'init-words\n"\
