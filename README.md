@@ -19,6 +19,10 @@ with bcm [
 	forall pins	[
 		gpio_fsel pins/1 GPIO_FSEL_OUTP
 	]
+	;; Set all pins on:
+	forall pins	[ gpio_clr pins/1 ]
+	delay 1000
+
 	;; Blink some pins
 	loop 10 [
 		pin: pins/(random 8)
@@ -27,6 +31,9 @@ with bcm [
 		gpio_set :pin
 		delay 50
 	]
+
+	;; Set all pins off:
+	forall pins	[ gpio_set pins/1 ]
 ]
 ```
 
