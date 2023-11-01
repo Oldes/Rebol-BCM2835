@@ -29,6 +29,10 @@ target-arm64: [
 	define: __LP64__ ; has long (integer) 64 bits
 	define: __arm64__
 ]
+target-armv6: [
+	arch: armv6
+	flag: "-march=armv6"
+]
 target-armv7: [
 	arch: armv7
 	flag: "-march=armv7-a"
@@ -47,6 +51,7 @@ include: [
 	%src/
 	%rebol/src/include/
 ]
+flag: shared
 
 #if Posix? [
 	cflags: [-fPIC "-std=c99"]
@@ -58,15 +63,17 @@ do %src/bcm2835-rebol-extension.r3
 
 eggs: only [
 	#if Posix? [
+		"Rebol bcm2835 extension: linux_armv6" [
+			name: %bcm2835-linux-armv6
+			:target-armv6
+		]
 		"Rebol bcm2835 extension: linux_armv7" [
 			name: %bcm2835-linux-armv7
 			:target-armv7
-			flag: shared
 		]
 		"Rebol bcm2835 extension: linux_arm64" [
 			name: %bcm2835-linux-arm64
 			:target-arm64
-			flag: shared
 		]
 	]
 ]
